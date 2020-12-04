@@ -1020,7 +1020,7 @@ Install_Libsodium(){
 		echo -e "${Info} Installation dependencies..."
 		yum -y groupinstall "Development Tools"
 		echo -e "${Info} Downloading..."
-		wget  --no-check-certificate -N "https://github.com/jedisct1/libsodium/releases/download/${Libsodiumr_ver}/libsodium-${Libsodiumr_ver}.tar.gz"
+		wget  --no-check-certificate -N "https://github.com/jedisct1/libsodium/archive/${Libsodiumr_ver}.tar.gz"
 		echo -e "${Info} Unziping..."
 		tar -xzf libsodium-${Libsodiumr_ver}.tar.gz && cd libsodium-${Libsodiumr_ver}
 		echo -e "${Info} Compile and install..."
@@ -1031,7 +1031,7 @@ Install_Libsodium(){
 		echo -e "${Info} Installation dependencies..."
 		apt-get install -y build-essential
 		echo -e "${Info} Downloading..."
-		wget  --no-check-certificate -N "https://github.com/jedisct1/libsodium/releases/download/${Libsodiumr_ver}/libsodium-${Libsodiumr_ver}.tar.gz"
+		wget  --no-check-certificate -N "https://github.com/jedisct1/libsodium/archive/${Libsodiumr_ver}.tar.gz"
 		echo -e "${Info} Unziping..."
 		tar -xzf libsodium-${Libsodiumr_ver}.tar.gz && cd libsodium-${Libsodiumr_ver}
 		echo -e "${Info} Compile and install..."
