@@ -74,7 +74,7 @@ BBR_installation_status(){
 	if [[ ! -e ${BBR_file} ]]; then
 		echo -e "${Error} No BBR script found, start downloading..."
 		cd "${file}"
-		if ! wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/bbr.sh; then
+		if ! wget -N --no-check-certificate https://raw.githubusercontent.com/xiihaiqal/ShadowsocksR/master/bbr.sh; then
 			echo -e "${Error} BBR script download failed !" && exit 1
 		else
 			echo -e "${Info} BBR script download completed !"
@@ -886,7 +886,7 @@ Service_SSR(){
 		chkconfig --add ssrmu
 		chkconfig ssrmu on
 	else
-		if ! wget --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/service/ssrmu_debian -O /etc/init.d/ssrmu; then
+		if ! wget --no-check-certificate https://raw.githubusercontent.com/xiihaiqal/ShadowsocksR/master/ssrmu_debian -O /etc/init.d/ssrmu; then
 			echo -e "${Error} ShadowsocksR service management script download failed !" && exit 1
 		fi
 		chmod +x /etc/init.d/ssrmu
@@ -1771,14 +1771,14 @@ crontab_monitor_ssr_cron_stop(){
 	fi
 }
 Update_Shell(){
-	sh_new_ver=$(wget --no-check-certificate -qO- -t1 -T3 "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssrmu.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
+	sh_new_ver=$(wget --no-check-certificate -qO- -t1 -T3 "https://raw.githubusercontent.com/xiihaiqal/ShadowsocksR/master/kingkongvpn.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} Unable to link to Github !" && exit 0
 	if [[ -e "/etc/init.d/hasan" ]]; then
 		rm -rf /etc/init.d/hasan
 		Service_SSR
 	fi
 	cd "${file}"
-	wget -N --no-check-certificate "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssrmu.sh" && chmod +x ssrmu.sh
+	wget -N --no-check-certificate "https://raw.githubusercontent.com/xiihaiqal/ShadowsocksR/master/kingkongvpn.sh" && chmod +x ssrmu.sh
 	echo -e "The script has been updated to the latest version [${sh_new_ver}]! (Note: Because the update method is to directly overwrite the currently running script, there may be some errors reported below, just ignore it)" && exit 0
 }
 # Display menu status
