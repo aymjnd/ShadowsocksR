@@ -1778,7 +1778,7 @@ Update_Shell(){
 		Service_SSR
 	fi
 	cd "${file}"
-	wget -N --no-check-certificate "https://raw.githubusercontent.com/xiihaiqal/ShadowsocksR/master/kingkongvpn.sh" && chmod +x ssrmu.sh
+	wget -N --no-check-certificate "https://raw.githubusercontent.com/xiihaiqal/ShadowsocksR/master/kingkongvpn.sh" && chmod +x kingkongvpn.sh
 	echo -e "The script has been updated to the latest version [${sh_new_ver}]! (Note: Because the update method is to directly overwrite the currently running script, there may be some errors reported below, just ignore it)" && exit 0
 }
 # Display menu status
