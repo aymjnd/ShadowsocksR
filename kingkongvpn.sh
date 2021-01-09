@@ -1847,6 +1847,7 @@ case "$num" in
 	View_user_connection_info
 	;;
 	7)
+	clear
 	Modify_Config
 	;;
 	8)
