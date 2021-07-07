@@ -74,7 +74,7 @@ BBR_installation_status(){
 	if [[ ! -e ${BBR_file} ]]; then
 		echo -e "${Error} No BBR script found, start downloading..."
 		cd "${file}"
-		if ! wget -N --no-check-certificate https://raw.githubusercontent.com/xiihaiqal/ShadowsocksR/master/bbr.sh; then
+		if ! wget -N --no-check-certificate https://raw.githubusercontent.com/aymjnd/ShadowsocksR/master/bbr.sh; then
 			echo -e "${Error} BBR script download failed !" && exit 1
 		else
 			echo -e "${Info} BBR script download completed !"
@@ -375,8 +375,8 @@ The [_compatible] behind the protocol and obfuscation refers to compatibility wi
 # Setting configuration information
 Set_config_user(){
 	echo "Please enter the user name to be set (please do not repeat it, it is used to distinguish, does not support Chinese, spaces, and an error will be reported!)"
-	read -e -p "(default: kingkong):" ssr_user
-	[[ -z "${ssr_user}" ]] && ssr_user="kingkong"
+	read -e -p "(default: ayam):" ssr_user
+	[[ -z "${ssr_user}" ]] && ssr_user="ayam"
 	ssr_user=$(echo "${ssr_user}"|sed 's/ //g')
 	echo && echo ${Separator_1} && echo -e "	Username : ${Green_font_prefix}${ssr_user}${Font_color_suffix}" && echo ${Separator_1} && echo
 }
@@ -401,8 +401,8 @@ Set_config_port(){
 }
 Set_config_password(){
 	echo "Please enter the user password to be set"
-	read -e -p "(default: kingkong):" ssr_password
-	[[ -z "${ssr_password}" ]] && ssr_password="kingkong"
+	read -e -p "(default: ayam):" ssr_password
+	[[ -z "${ssr_password}" ]] && ssr_password="ayam"
 	echo && echo ${Separator_1} && echo -e "	Password : ${Green_font_prefix}${ssr_password}${Font_color_suffix}" && echo ${Separator_1} && echo
 }
 Set_config_method(){
@@ -886,7 +886,7 @@ Service_SSR(){
 		chkconfig --add ssrmu
 		chkconfig ssrmu on
 	else
-		if ! wget --no-check-certificate https://raw.githubusercontent.com/xiihaiqal/ShadowsocksR/master/ssrmu_debian -O /etc/init.d/ssrmu; then
+		if ! wget --no-check-certificate https://raw.githubusercontent.com/aymjnd/ShadowsocksR/master/ssrmu_debian -O /etc/init.d/ssrmu; then
 			echo -e "${Error} ShadowsocksR service management script download failed !" && exit 1
 		fi
 		chmod +x /etc/init.d/ssrmu
@@ -1398,7 +1398,7 @@ Clear_transfer_all_cron_start(){
 	echo -e "\n${Crontab_time} /bin/bash $file/ssrmu.sh clearall" >> "$file/crontab.bak"
 	crontab "$file/crontab.bak"
 	rm -r "$file/crontab.bak"
-	cron_config=$(crontab -l | grep "kingkongvpn.sh")
+	cron_config=$(crontab -l | grep "ssr.sh")
 	if [[ -z ${cron_config} ]]; then
 		echo -e "${Error} Timed all user traffic cleared and failed to start !" && exit 1
 	else
@@ -1410,7 +1410,7 @@ Clear_transfer_all_cron_stop(){
 	sed -i "/ssrmu.sh/d" "$file/crontab.bak"
 	crontab "$file/crontab.bak"
 	rm -r "$file/crontab.bak"
-	cron_config=$(crontab -l | grep "kingkongvpn.sh")
+	cron_config=$(crontab -l | grep "ssr.sh")
 	if [[ ! -z ${cron_config} ]]; then
 		echo -e "${Error} Failed to clear all user traffic regularly and stop !" && exit 1
 	else
@@ -1497,7 +1497,6 @@ Configure_Server_Speeder(){
 }
 Install_ServerSpeeder(){
 	[[ -e ${Server_Speeder_file} ]] && echo -e "${Error} Server Speeder is installed !" && exit 1
-	#Borrow the happy version of Server Speeder from KingKongVPN
 	wget --no-check-certificate -qO /tmp/serverspeeder.sh https://raw.githubusercontent.com/91yun/serverspeeder/master/serverspeeder.sh
 	[[ ! -e "/tmp/serverspeeder.sh" ]] && echo -e "${Error} Server Speeder installation script download failed !" && exit 1
 	bash /tmp/serverspeeder.sh
@@ -1665,12 +1664,12 @@ Other_functions(){
 }
 # Ban BT PT SPAM
 BanBTPTSPAM(){
-	wget -N --no-check-certificate https://raw.githubusercontent.com/xiihaiqal/ShadowsocksR/master/ban_iptables.sh && chmod +x ban_iptables.sh && bash ban_iptables.sh banall
+	wget -N --no-check-certificate https://raw.githubusercontent.com/aymjnd/ShadowsocksR/master/ban_iptables.sh && chmod +x ban_iptables.sh && bash ban_iptables.sh banall
 	rm -rf ban_iptables.sh
 }
 # Unblock BT PT SPAM
 UnBanBTPTSPAM(){
-	wget -N --no-check-certificate https://raw.githubusercontent.com/xiihaiqal/ShadowsocksR/master/ban_iptables.sh && chmod +x ban_iptables.sh && bash ban_iptables.sh unbanall
+	wget -N --no-check-certificate https://raw.githubusercontent.com/aymjnd/ShadowsocksR/master/ban_iptables.sh && chmod +x ban_iptables.sh && bash ban_iptables.sh unbanall
 	rm -rf ban_iptables.sh
 }
 Set_config_connect_verbose_info(){
@@ -1763,7 +1762,7 @@ crontab_monitor_ssr_cron_stop(){
 	sed -i "/ssrmu.sh monitor/d" "$file/crontab.bak"
 	crontab "$file/crontab.bak"
 	rm -r "$file/crontab.bak"
-	cron_config=$(crontab -l | grep "kingkongvpn.sh monitor")
+	cron_config=$(crontab -l | grep "ssr.sh monitor")
 	if [[ ! -z ${cron_config} ]]; then
 		echo -e "${Error} ShadowsocksR server running status monitoring function stops failed !" && exit 1
 	else
@@ -1771,14 +1770,14 @@ crontab_monitor_ssr_cron_stop(){
 	fi
 }
 Update_Shell(){
-	sh_new_ver=$(wget --no-check-certificate -qO- -t1 -T3 "https://raw.githubusercontent.com/xiihaiqal/ShadowsocksR/master/kingkongvpn.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
+	sh_new_ver=$(wget --no-check-certificate -qO- -t1 -T3 "https://raw.githubusercontent.com/aymjnd/ShadowsocksR/master/ssr.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} Unable to link to Github !" && exit 0
 	if [[ -e "/etc/init.d/hasan" ]]; then
 		rm -rf /etc/init.d/hasan
 		Service_SSR
 	fi
 	cd "${file}"
-	wget -N --no-check-certificate "https://raw.githubusercontent.com/xiihaiqal/ShadowsocksR/master/kingkongvpn.sh" && chmod +x kingkongvpn.sh
+	wget -N --no-check-certificate "https://raw.githubusercontent.com/aymjnd/ShadowsocksR/master/ssr.sh" && chmod +x ssr.sh
 	echo -e "The script has been updated to the latest version [${sh_new_ver}]! (Note: Because the update method is to directly overwrite the currently running script, there may be some errors reported below, just ignore it)" && exit 0
 }
 # Display menu status
@@ -1803,7 +1802,7 @@ if [[ "${action}" == "clearall" ]]; then
 elif [[ "${action}" == "monitor" ]]; then
 	crontab_monitor_ssr
 else
-	echo -e "  ShadowsocksR KingKongVPN-Key management script ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
+	echo -e "  ShadowsocksR Key Management Script ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
 ————————————————————————————————————————————————
   ${Green_font_prefix}1.${Font_color_suffix} Install ShadowsocksR
   ${Green_font_prefix}2.${Font_color_suffix} Update ShadowsocksR
